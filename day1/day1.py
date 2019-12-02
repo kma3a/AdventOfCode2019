@@ -1,7 +1,4 @@
-import sys
-inFile = sys.argv[1]
-
-with open(inFile,'r') as i:
+with open('input.txt','r') as i:
     lines = i.readlines()
 
 def calcMass(num):
@@ -15,8 +12,8 @@ def calcSum(array):
         sum += calcMass(number)
     return sum
 
-
-print(calcSum(lines))
+#testing calcsum and that we are getting from the input.txt
+#print(calcSum(lines) == 34241)
 
 #calcMass tests
 #print(calcMass(12) == 2)
