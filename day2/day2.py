@@ -1,7 +1,6 @@
 import sys
 
-
-def getInput(string):
+def parseArg(data):
     parsedStr = string.strip().split(",")
     return map(int, parsedStr)
 
@@ -11,16 +10,15 @@ def replaceData(array):
     return array
 
 
-def compute(data):
+def getInput(data):
     if type(data) == str:
-        input = getInput(data)
-        print("BEFORE")
-        print(input)
-        input = replaceData(input)
-        print("AFTER")
-        print(input)
-    else:
-        input = data
+        input = parseArg(data)
+        return replaceData(input)
+    return data
+
+
+def compute(data):
+    input = getInput(data)
     i = 0
     getValue = lambda a : input[input[a]]
     while input[i] != 99:
@@ -59,14 +57,6 @@ print(test4)
 ## Actual
 line = open(sys.argv[1],'r').read()
 real = compute(line)
-print(compute(line))
-
-
-
-
-
-
-
-
+print(real)
 
 
