@@ -14,15 +14,27 @@ def checkPassword(password):
     #checkes password length is 6
     hasLength = len(passString) == 6
     #check for double characters
-    hasCharacters = re.findall(r'(\d)\1', passString)
+    hasCharacters = re.search(r'(\d)\1', passString)
     if hasCharacters and hasLength:
         return checkIncrease(passString)
     return False
 
+def checkGroup(password):
+    password = str(password)
+    numCon = {}
+    index = 0
+    while index < len(str(password))-1:
+        number = password[index]
+        if number == password[index+1]:
+            numCon[number] += 1
+        index += 1
+    return numCon
+
+
 def findPasswordCount(startPoint, endPoint):
     validPasswords = 0
     while startPoint <= endPoint:
-        if checkPassword(startPoint):
+        if checkGroup(startPoint) and checkPassword(startPoint):
             validPasswords += 1
         startPoint += 1
     return validPasswords
@@ -56,6 +68,29 @@ print(checkPassword(232450) == False)
 print('it has no doubles')
 print(checkPassword(123789) == False)
 
+#part 2 tests
+print("part 2 tests")
+print('it should return true if there are all duplicate numbers')
+print(checkGroup(112233))
+print(checkGroup(112233) == True)
+print('it should return true if there are two sets of doubles')
+print(checkGroup(111122) == True)
+print(checkGroup(112222) == True)
+print('it should return false if there are 3 of the same number')
+print(checkGroup(123444) == False)
+print('it should return false if there are 3 of the same number in the center')
+print(checkGroup(124445) == False)
+print('it should return false if there are 4 of the same but does not have another match')
+print(checkGroup(122223) == False)
+print(checkGroup(222235) == False)
+print(checkGroup(222225) == False)
 
-print(findPasswordCount(235741, 706948))
+
+
+
+#print(findPasswordCount(235741, 706948))
 #441 is not the correct answer
+#part 2
+# 557 is not right
+# 759 is not right Too Low
+
